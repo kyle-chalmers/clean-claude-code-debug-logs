@@ -6,7 +6,13 @@ Automated cleanup solution for Claude Code debug logs that can grow to hundreds 
 
 Claude Code stores debug logs in `~/.claude/debug/`. These files capture full session transcripts including conversation history, tool call outputs, and file contents read during sessions.
 
-A bug in Claude Code can cause debug logs to grow exponentially during a single session - files can reach **200GB+** due to an infinite loop in the logging mechanism. This happens when:
+A bug in Claude Code can cause debug logs to grow exponentially during a single session - files can reach **200GB+** due to an infinite loop in the logging mechanism.
+
+![Storage nearly full due to debug logs](images/storage-problem.png)
+
+![Documents folder bloated by debug logs](images/large-documents-storage.png)
+
+This happens when:
 1. A tool call produces large output (MCP queries, file reads, etc.)
 2. The debug logging captures this output
 3. Under certain conditions, the log file itself gets included in subsequent logging
